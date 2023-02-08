@@ -71,7 +71,7 @@ async function startJobs(jobs, context) {
                                 context.log(message.workerName, 'Finished Job, current data entries', collection.length)
                             // eslint-disable-next-line no-fallthrough
                             case 'ready':
-                                continueWork(message.id)
+                                continueWork(message.id, context)
                                 break
                             case 'job failed':
                                 context.log.error(`${message.workerName} - failed`)
@@ -108,9 +108,9 @@ async function startJobs(jobs, context) {
     })
 }
 
-function continueWork(workerId) {
+function continueWork(workerId, context) {
     const worker = workers.find(w => w.threadId === workerId)
-    console.log('[JOBS LEFT]', jobQ.length)
+    context.log('[JOBS LEFT]', jobQ.length)
     if (jobQ.length > 0) {
         const nextJob = jobQ.shift()
         worker.postMessage({ do: nextJob.type, job: nextJob })
