@@ -62,7 +62,7 @@ async function startJobs(jobs, context) {
         try {
             while (working) {
                 if (workers.length < workerLimit && jobQ.length) {
-                    const worker = new Worker('../SharedCode/PuppetWorker.js')
+                    const worker = new Worker('../sharedcode/PuppetWorker.js')
                     context.log('worker started', workers.length)
                     workers.push(worker)
                     worker.on('message', (message) => {
