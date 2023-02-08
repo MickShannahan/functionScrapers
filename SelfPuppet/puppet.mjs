@@ -9,7 +9,7 @@ export default async function (context, req) {
     try {
         const jobs = createQueue(req.body.list, req.body.week)
 
-        const results = startJobs(jobs, context)
+        const results = await startJobs(jobs, context)
         return {
             body: results
         }
