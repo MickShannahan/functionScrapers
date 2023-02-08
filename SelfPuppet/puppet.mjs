@@ -91,7 +91,7 @@ async function startJobs(jobs, context) {
                     })
                     worker.on('exit', () => {
                         workers.splice(workers.findIndex(w => w.threadId === worker.threadId), 1)
-                        context.error('[Worker Exited] remaining work force ', workers.length)
+                        context.log.error('[Worker Exited] remaining work force ', workers.length)
                     })
                 }
                 if (workers.length === 0) {
