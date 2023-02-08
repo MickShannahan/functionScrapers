@@ -41,4 +41,4 @@ jobs:
           app-name: 'kiwi-scraper'
           slot-name: 'Production'
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_92946C8219CA4E92975CDBC7C3DFEEAF }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FD94126E6AD445F49386E1E5AAB5C04F }}
