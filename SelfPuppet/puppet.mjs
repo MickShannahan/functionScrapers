@@ -63,6 +63,7 @@ async function startJobs(jobs, context) {
             while (working) {
                 if (workers.length < workerLimit && jobQ.length) {
                     const worker = new Worker('./SharedCode/PuppetWorker.js')
+                    context.log('worker started', workers.length)
                     workers.push(worker)
                     worker.on('message', (message) => {
                         switch (message.status) {
@@ -92,6 +93,7 @@ async function startJobs(jobs, context) {
                     worker.on('exit', () => {
                         workers.splice(workers.findIndex(w => w.threadId === worker.threadId), 1)
                         context.log.error('[Worker Exited] remaining work force ', workers.length)
+                        if (workers.length == 0) working = false // no workers, then stop function
                     })
                 }
                 if (workers.length === 0) {
