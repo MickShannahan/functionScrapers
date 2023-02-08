@@ -2,7 +2,7 @@ import { AccountSASPermissions, AccountSASResourceTypes, AccountSASServices, Blo
 import Cat from 'catid'
 import { Worker } from 'worker_threads'
 import blobService from '../sharedcode/BlobService.js'
-import puppeteer from 'puppeteer-core'
+import puppeteer from 'puppeteer'
 
 export default async function (context, jobs) {
     browser = await puppeteer.launch(chromeOptions)
