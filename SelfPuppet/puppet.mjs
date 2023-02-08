@@ -68,19 +68,19 @@ async function startJobs(jobs, context) {
                         switch (message.status) {
                             case 'job done':
                                 collection.push(message.data)
-                                console.log(message.workerName, 'Finished Job, current data entries', collection.length)
+                                context.log(message.workerName, 'Finished Job, current data entries', collection.length)
                             // eslint-disable-next-line no-fallthrough
                             case 'ready':
                                 continueWork(message.id)
                                 break
                             case 'job failed':
-                                console.error(`${message.workerName} - failed`)
+                                context.log.error(`${message.workerName} - failed`)
                                 if (message.job) console.error('[Failed Job]', message.job)
                                 if (message.error) console.error(message.error)
                                 worker.postMessage({ do: 'nothing', job: 'quitting time' })
                                 break
                             default:
-                                console.error(`${message.workerName} - ${message.status}`)
+                                context.log.error(`${message.workerName} - ${message.status}`)
                                 if (message.error) console.error(message.error)
                         }
                     })
@@ -91,11 +91,11 @@ async function startJobs(jobs, context) {
                     })
                     worker.on('exit', () => {
                         workers.splice(workers.findIndex(w => w.threadId === worker.threadId), 1)
-                        console.error('[Worker Exited] remaining work force ', workers.length)
+                        context.error('[Worker Exited] remaining work force ', workers.length)
                     })
                 }
                 if (workers.length === 0) {
-                    console.log('Collected data', collection)
+                    context.log('Collected data', collection)
                     working = false
                 }
                 await doWork()
