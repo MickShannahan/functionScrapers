@@ -1,0 +1,11 @@
+{
+  "scriptFile": "scraper.mjs",
+  "bindings": [
+    {
+      "name": "jobs",
+      "type": "activityTrigger",
+      "direction": "in"
+    }
+  ],
+  "disabled": false
+}

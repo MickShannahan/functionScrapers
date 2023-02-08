@@ -1,0 +1,11 @@
+{
+  "scriptFile": "orchestrator.mjs",
+  "bindings": [
+    {
+      "name": "context",
+      "type": "orchestrationTrigger",
+      "direction": "in"
+    }
+  ],
+  "disabled": false
+}

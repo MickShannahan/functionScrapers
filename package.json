@@ -1,0 +1,17 @@
+{
+  "name": "functionscrapers",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "clean": "npm cache clean --force && npm prune --production",
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {
+    "@azure/storage-blob": "^12.12.0",
+    "catid": "^1.0.2",
+    "dotenv": "^16.0.3",
+    "durable-functions": "^2.1.0",
+    "puppeteer": "^19.6.3"
+  }
+}
