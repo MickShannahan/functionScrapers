@@ -1,4 +1,3 @@
-import puppeteer from "puppeteer";
 
 // STUB OPTIONS
 const headless = true
@@ -64,12 +63,10 @@ function url(name, type, week, day) {
 export default async function (context, req) {
     try {
         context.log('JavaScript HTTP trigger function processed a request.');
-        browser = await puppeteer.launch(chromeOptions)
         const name = (req.query.name || (req.body && req.body.name));
         const responseMessage = name
             ? "Hello, " + name + ". This HTTP triggered function executed successfully."
             : "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.";
-        await browser.close()
         return {
             body: responseMessage
         }
