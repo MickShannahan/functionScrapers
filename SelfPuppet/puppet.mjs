@@ -1,15 +1,65 @@
 
 // STUB OPTIONS
+import puppeteer from 'puppeteer'
 import { Worker } from 'worker_threads'
 
-
+const chromeOptions = {
+    headless: true,
+    defaultViewport: null,
+    args: [
+        '--autoplay-policy=user-gesture-required',
+        '--disable-background-networking',
+        '--disable-background-timer-throttling',
+        '--disable-backgrounding-occluded-windows',
+        '--disable-breakpad',
+        '--disable-client-side-phishing-detection',
+        '--disable-component-update',
+        '--disable-default-apps',
+        '--disable-dev-shm-usage',
+        '--disable-domain-reliability',
+        '--disable-extensions',
+        '--disable-features=AudioServiceOutOfProcess',
+        '--disable-hang-monitor',
+        '--disable-ipc-flooding-protection',
+        '--disable-notifications',
+        '--disable-offer-store-unmasked-wallet-cards',
+        '--disable-popup-blocking',
+        '--disable-print-preview',
+        '--disable-prompt-on-repost',
+        '--disable-renderer-backgrounding',
+        '--disable-setuid-sandbox',
+        '--disable-speech-api',
+        '--disable-sync',
+        '--hide-scrollbars',
+        '--ignore-gpu-blacklist',
+        '--metrics-recording-only',
+        '--mute-audio',
+        '--no-default-browser-check',
+        '--no-first-run',
+        '--no-pings',
+        '--no-sandbox',
+        '--no-zygote',
+        '--password-store=basic',
+        '--use-gl=swiftshader',
+        '--use-mock-keychain'
+    ]
+}
+const blockedDomains = [
+    'googlesyndication.com',
+    'adservice.google.com',
+    'simple-jekyll-search.min.js',
+    'bcw.blob',
+    'search',
+    '.png'
+]
 
 // STUB CLOUD FUNCTION
 export default async function (context, req) {
     try {
         const jobs = createQueue(req.body.list, req.body.week)
-
+        const browser = await puppeteer.launch(chromeOptions)
         const results = await startJobs(jobs, context)
+        await browser.close()
         return {
             body: results
         }
