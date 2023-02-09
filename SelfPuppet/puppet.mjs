@@ -54,7 +54,7 @@ const workers = []
 const workerLimit = 1
 
 async function startJobs(jobs, context) {
-    context.log.error('[Starting Jobs]', jobs.length)
+    context.log.error('[Starting Jobs]', jobs)
     const collection = []
     jobQ = jobs
     let working = true
