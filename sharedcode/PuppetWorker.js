@@ -2,7 +2,6 @@ const { isMainThread, parentPort, threadId } = require('worker_threads')
 const puppeteer = require('puppeteer')
 const Cat = require('catid')
 const blobService = require('./BlobService')
-const process = require('process')
 const { BlobServiceClient, AccountSASPermissions, AccountSASServices, AccountSASResourceTypes } = require('@azure/storage-blob')
 
 const chromeOptions = {

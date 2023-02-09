@@ -63,8 +63,8 @@ async function startJobs(jobs, context) {
             while (working) {
                 if (workers.length < workerLimit && jobQ.length) {
                     const worker = new Worker('../sharedcode/PuppetWorker.js')
-                    context.log('worker started', workers.length)
                     workers.push(worker)
+                    context.log('worker started', workers.length)
                     worker.on('message', (message) => {
                         switch (message.status) {
                             case 'job done':
